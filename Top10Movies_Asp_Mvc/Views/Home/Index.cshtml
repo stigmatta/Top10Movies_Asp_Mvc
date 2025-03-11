@@ -4,12 +4,12 @@
 {
     <div style="margin-bottom:5em; color:white">
         <h2>@(movie.index + 1). @movie.movie.Title (@movie.movie.Year)</h2>
-        <div style="display:flex; margin-top:1.5em">
-            <img style="display:block; height:30em" alt="image-link" src="@movie.movie.ImageLink" />
-            <div style="display:flex;flex-direction:column; margin-left:5em;">
+        <div style="display:flex; margin-top:1.5em;height:25em">
+            <img style="display:block; height:100%" alt="image-link" src="@movie.movie.ImageLink" />
+            <div style="height:100%;display:flex;flex-direction:column; margin-left:5em;">
                 <h3>@movie.movie.Author</h3>
-                <p style="color:#8694a4">@movie.movie.Description</p>
-                <p style="margin-top:auto; color:#03c24c;font-size:1.5em">Genre: @movie.movie.Genre</p>
+                <p style="color:#8694a4;margin-top:1em">@movie.movie.Description</p>
+                <span style="margin-top:auto; color:#03c24c;font-size:1.5em">Genre: @movie.movie.Genre</span>
             </div>
         </div>
     </div>
