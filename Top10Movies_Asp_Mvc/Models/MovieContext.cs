@@ -6,7 +6,7 @@ namespace Top10Movies_Asp_Mvc.Models
     {
         public DbSet<Movie> Movies { get; set; }
 
-        public MovieContext(DbContextOptions<MovieContext> options): base(options){ }
+        public MovieContext(DbContextOptions<MovieContext> options) : base(options) { }  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
