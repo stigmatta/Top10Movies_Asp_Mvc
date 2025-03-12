@@ -19,8 +19,7 @@ namespace Top10Movies_Asp_Mvc.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<Movie> movies = await _context.Movies.ToListAsync();
-            ViewBag.Movies = movies;
-            return View(); 
+            return View(movies); 
         }
 
         public IActionResult Privacy()

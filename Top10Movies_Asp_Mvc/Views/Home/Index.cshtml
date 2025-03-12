@@ -1,4 +1,6 @@
-﻿@foreach (var movie in ((IEnumerable<Movie>)ViewBag.Movies).Select((movie, index) => new { movie, index }))
+﻿@model IEnumerable<Top10Movies_Asp_Mvc.Models.Movie>
+
+@foreach (var movie in Model.Select((movie, index) => new { movie, index }))
 {
     <div style="margin-bottom:5em; color:white">
         <h2>@(movie.index + 1). @movie.movie.Title (@movie.movie.Year)</h2>
@@ -11,5 +13,6 @@
             </div>
         </div>
     </div>
+
 }
 
