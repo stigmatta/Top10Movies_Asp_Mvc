@@ -22,9 +22,74 @@ namespace Top10Movies_Asp_Mvc.Controllers
             return View(movies); 
         }
 
-        public IActionResult Privacy()
+        public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id", "Title", "Description", "Author", "Genre", "Year", "ImageLink")] Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(movie);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(movie);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                RedirectToAction("Index");
+
+            var movie = await _context.Movies.FindAsync(id);
+
+            if (movie == null)
+                RedirectToAction("Index");
+            return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Author", "Genre", "Year", "ImageLink")] Movie movie)
+        {
+            if (id != movie.Id)
+                return View("Error", new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(movie);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    return View("Error", new ErrorViewModel
+                    {
+                        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                    });
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(movie);
+        }
+
+        public async Task <IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                RedirectToAction("Index");
+
+            var movie = await _context.Movies.FindAsync(id);
+
+            if (movie == null)
+                RedirectToAction("Index");
+            return View(movie);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

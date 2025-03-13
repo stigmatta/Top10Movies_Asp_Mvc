@@ -9,10 +9,24 @@
             <div style="height:100%;display:flex;flex-direction:column; margin-left:5em;">
                 <h3>@movie.movie.Author</h3>
                 <p style="color:#8694a4;margin-top:1em">@movie.movie.Description</p>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@movie.movie.Id"
+                    style="font-size:1.3em; margin-bottom:1em; background-color:#03c24c; color:white; text-decoration:none; display:inline-block; border:none; border-radius:.5em; width:6em; text-align:center; padding:0.5em 0;"
+                 >
+                    Edit
+                </a>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id="@movie.movie.Id"
+                   style="font-size:1.3em; margin-bottom:1em; background-color:#03c24c; color:white; text-decoration:none; display:inline-block; border:none; border-radius:.5em; width:6em; text-align:center; padding:0.5em 0;"
+                 >
+                    Delete
+                </a>               
                 <span style="margin-top:auto; color:#03c24c;font-size:1.5em">Genre: @movie.movie.Genre</span>
             </div>
         </div>
     </div>
-
 }
+
+<a style="font-size:1.3em; margin-bottom:1em; background-color:#03c24c; color:white; text-decoration:none; display:inline-block; border:none; border-radius:.5em; width:6em; text-align:center; padding:0.5em 0;"
+    asp-action="Create" asp-controller="Home">
+    Add new
+</a>
 
