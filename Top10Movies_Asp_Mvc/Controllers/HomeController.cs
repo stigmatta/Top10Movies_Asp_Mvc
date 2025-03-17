@@ -44,7 +44,6 @@ namespace Top10Movies_Asp_Mvc.Controllers
                 RedirectToAction("Index");
 
             var movie = await _context.Movies.FindAsync(id);
-
             if (movie == null)
                 RedirectToAction("Index");
             return View(movie);
@@ -79,7 +78,6 @@ namespace Top10Movies_Asp_Mvc.Controllers
                 return RedirectToAction("Index");
 
             var movie = await _context.Movies.FindAsync(id);
-
             if (movie == null)
                 return RedirectToAction("Index"); 
 
@@ -91,7 +89,7 @@ namespace Top10Movies_Asp_Mvc.Controllers
         [ValidateAntiForgeryToken] 
         public async Task<IActionResult> DeleteConfirmed(Movie movie)
         {
-            var delMovie = await _context.Movies.FirstOrDefaultAsync(m=>m.Id==movie.Id);
+            var delMovie = await _context.Movies.FindAsync(movie.Id);
             if (delMovie == null)
                 return RedirectToAction("Index");
 
@@ -107,7 +105,6 @@ namespace Top10Movies_Asp_Mvc.Controllers
                     RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
                 });
             }
-
             return RedirectToAction(nameof(Index));
         }
 
