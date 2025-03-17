@@ -21,10 +21,34 @@ namespace Top10Movies_Asp_Mvc.Models
         [Required]
         [RegularExpression("^[A-Za-z ]+$", ErrorMessage = "Genre must contain only letters.")]
         public string? Genre {  get; set; }
+
+        [Required]
+        [YearRange]
         public int Year { get; set; }
         [Required]
         [RegularExpression(@"^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp))(?:\?.*)?$",
         ErrorMessage = "Please enter a valid image URL ending with .png, .jpg, .jpeg, .gif, .bmp, or .webp.")]
         public string? ImageLink { get; set; }
     }
+
+
+    public class YearRangeAttribute : ValidationAttribute
+    {
+        const int min = 1900;
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            int max = DateTime.Now.Year;
+
+            if (value is int year)
+            {
+                int maxYear = DateTime.Now.Year;
+                if (year < min || year > max)
+                {
+                    return new ValidationResult($"Year must be between {min} and {max}.");
+                }
+            }
+            return ValidationResult.Success;
+        }
+    }
+
 }
