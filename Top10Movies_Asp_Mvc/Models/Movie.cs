@@ -6,11 +6,10 @@ namespace Top10Movies_Asp_Mvc.Models
     {
         public int Id { get; set; }
         [Required]
-        [MinLength(2)]
+        [Length(2,200,ErrorMessage = "Length has to be between 2 and 200 symbols")]
         public string? Title { get; set; }
         [Required]
-        [MinLength(10)]
-        [MaxLength(500)]
+        [Length(10,500, ErrorMessage = "Length has to be between 10 and 500 symbols")]
         public string? Description { get; set; }
 
         [Required]
@@ -25,6 +24,7 @@ namespace Top10Movies_Asp_Mvc.Models
         [Required]
         [YearRange]
         public int Year { get; set; }
+        [Display(Name = "Link")]
         [Required]
         [RegularExpression(@"^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp))(?:\?.*)?$",
         ErrorMessage = "Please enter a valid image URL ending with .png, .jpg, .jpeg, .gif, .bmp, or .webp.")]
